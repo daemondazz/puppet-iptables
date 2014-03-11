@@ -11,7 +11,9 @@
 <% end -%>
 -A ABUSERS -m limit --limit 1/min -j LOG --log-prefix "IPTABLES ABUSER BLOCKED: " --log-level 7
 -A ABUSERS -m recent --set --name abusers --rdest -j DROP
+<% if iptables_ssh_port -%>
 -A <%= trusted_chain %> -p tcp --dport <%= iptables_ssh_port %> -j ACCEPT
+<% end -%>
 -A INPUT -i lo -j ACCEPT
 -A INPUT -m recent --update --seconds 3600 --name abusers --rsource -j DROP
 -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
