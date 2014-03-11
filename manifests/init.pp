@@ -1,0 +1,4 @@
+# iptables module
+class iptables {
+}
+
